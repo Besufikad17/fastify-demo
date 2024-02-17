@@ -4,7 +4,7 @@ import { users } from "../helpers/constants";
 class UserController {
 
   public getAllUsers = async(req: FastifyRequest, reply: FastifyReply) => {
-    return reply.send(users); 
+    return users; 
   }
 
 }

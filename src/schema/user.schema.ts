@@ -1,24 +1,24 @@
 import { FastifyReply, FastifyRequest } from "fastify";
+import { UserController } from "../controllers/user.controller";
+import { Type } from '@sinclair/typebox'
+
+const controller = new UserController();
+const UserSchema = Type.Object({
+  id: Type.String(),
+  fname: Type.String(),
+  lname: Type.String(),
+  phoneNumber: Type.String(),
+  email: Type.String(),
+  createdAt: Type.String({ format: 'date-time' }),
+});
 
 export const getAllUsersSchema = {
   schema: {
     response : {
-      200 : {
-        type: 'array',
-        items: {
-          type: 'object',
-          properties: {
-            id: { type: 'string' },
-            fname: { type: 'string' },
-            lname: { type: 'string' },
-            phoneNumber: { type: 'string' },
-            email: { type: 'string' }
-          }
-        }
-      }
-    }
+      200: Type.Array(UserSchema)
+    } 
   },
-  handler: (request: FastifyRequest, reply: FastifyReply) => {
-    
+  handler: (req: FastifyRequest, reply: FastifyReply) => {
+    return controller.getAllUsers(req, reply);
   }
 }

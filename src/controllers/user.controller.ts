@@ -1,6 +1,6 @@
 import { FastifyReply, FastifyRequest } from "fastify";
 import { users } from "../helpers/constants";
-import { QuerySchema } from "../schema/user.schema";  
+import { ParamsSchema, QuerySchema } from "../schema/user.schema";  
 
 class UserController {
 
@@ -13,6 +13,13 @@ class UserController {
         user.email == text || 
         user.phoneNumber == text
     ).slice(skip || 0, take || 5); 
+  }
+
+  public getUserById = async(req: FastifyRequest, reply: FastifyReply) => {
+    const { id } = req.params as typeof ParamsSchema;
+    console.log(id);
+
+    return users.filter((user) => user.id == id);
   }
 
 }

@@ -19,6 +19,10 @@ export const QuerySchema = Type.Object({
   text: Type.String()
 });
 
+export const ParamsSchema = Type.Object({
+  id: Type.String(),
+});
+
 export const getAllUsersSchema = {
   schema: {
     queryString: QuerySchema,
@@ -28,6 +32,18 @@ export const getAllUsersSchema = {
   },
   handler: (req: FastifyRequest, reply: FastifyReply) => {
     return controller.getAllUsers(req, reply);
+  }
+}
+
+export const getUserById = {
+  schema: {
+    params: ParamsSchema,
+    response: {
+      200: UserSchema
+    }
+  },
+  handler: (req: FastifyRequest, reply: FastifyReply) => {
+    return controller.getUserById(req, reply);
   }
 }
 

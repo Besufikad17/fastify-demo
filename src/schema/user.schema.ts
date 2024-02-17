@@ -3,6 +3,7 @@ import { UserController } from "../controllers/user.controller";
 import { Type } from '@sinclair/typebox'
 
 const controller = new UserController();
+
 const UserSchema = Type.Object({
   id: Type.String(),
   fname: Type.String(),
@@ -12,9 +13,16 @@ const UserSchema = Type.Object({
   createdAt: Type.String({ format: 'date-time' }),
 });
 
+export const QuerySchema = Type.Object({
+  skip: Type.Number(),
+  take: Type.Number(),
+  text: Type.String()
+});
+
 export const getAllUsersSchema = {
   schema: {
-    response : {
+    queryString: QuerySchema,
+    response: {
       200: Type.Array(UserSchema)
     } 
   },
@@ -22,3 +30,4 @@ export const getAllUsersSchema = {
     return controller.getAllUsers(req, reply);
   }
 }
+

@@ -1,0 +1,109 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html dir="ltr" lang="en">
+
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css" />
+  </head>
+  <div class="subject"><%= type == "VERIFICATION" ? "Ethiopiclingo Email Verification" : "Ethiopiclingo Password Reset Request" %></div>
+
+  <body>
+    <table align="center" width="100%" border="0" cellPadding="0" cellSpacing="0" role="presentation" class="parent-table">
+      <tbody>
+        <tr style="width:100%">
+          <td>
+            <table align="center" width="100%" border="0" cellPadding="0" cellSpacing="0" role="presentation" class="table-first-child">
+              <tbody>
+                <tr>
+                  <td>
+                    <table align="center" width="100%" border="0" cellPadding="0" cellSpacing="0" role="presentation" class="table-second-child">
+                      <tbody>
+                        <tr>
+                          <td><img alt="AWS&#x27;s Logo" height="45" src="assets/images/logo.gif" style="display:block;outline:none;border:none;text-decoration:none" width="75" /></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <table align="center" width="100%" border="0" cellPadding="0" cellSpacing="0" role="presentation" style="padding:25px 35px">
+                      <tbody>
+                        <tr>
+                          <td>
+                            <h1><%= type == "VERIFICATION" ? "Verify your email address" : "Verify your Password Reset Resquest" %></h1>
+                            <p><%= type == "VERIFICATION" ? "Thanks for starting the new Ethiopiclingo account creation process. We want to make sure it's really you. Please enter the followin verification code when prompted. If you don&apos;t want to create an account, you can ignore this message." : " Someone recently requested a password change for your Ethiopiclingo account. Please enter the following verification code when prompted. If you don&apos;t want to create an account, you can ignore this message." %></p>
+                            <table align="center" width="100%" border="0" cellPadding="0" cellSpacing="0" role="presentation" style="display:flex;align-items:center;justify-content:center">
+                              <tbody>
+                                <tr>
+                                  <td>
+                                    <p>Verification code</p>
+                                    <p><%= verificationCode %></p>
+                                    <p>(This code is valid for 10 minutes)</p>
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <hr style="width:100%;border:none;border-top:1px solid #eaeaea" />
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </body>
+  <style>
+    body {
+        background-color: #fff;
+        color: #212121;
+    }
+
+    p {
+        font-size: 14px;
+        line-height: 24px;
+        margin: 0;
+        color:#333;
+        font-family: -apple-system, BlinkMacSystemFont;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    h1 {
+        color:#333;
+        font-family:-apple-system, BlinkMacSystemFont;
+        font-size: 20px;
+        font-weight: bold;
+        margin-bottom: 15px;
+    }
+
+    .subject {
+        display: none;
+        overflow: hidden;
+        line-height: 1px;
+        opacity: 0;
+        max-height: 0;
+        max-width: 0;
+    }
+
+    .parent-table {
+        max-width: 37.5em;
+        padding: 20px;
+        margin: 0 auto;
+        background-color: #eee;
+    }
+
+    .table-first-child {
+        background-color:#fff;
+    }
+
+    .table-second-child {
+        background-color:#252f3d;
+        display: flex;
+        padding: 20px 0;
+        align-items: center;
+        justify-content: center;
+    }
+  </style>
+</html>

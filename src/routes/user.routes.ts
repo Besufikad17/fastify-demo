@@ -1,12 +1,21 @@
-import { FastifyInstance } from "fastify";
-import { getUserById, getAllUsersSchema } from "../schema/user.schema";
+import { FastifyPluginCallback } from "fastify";
+import { getAllUsersSchema, getTokenSchema, getUserByIdSchema, getVerificationCodeSchema } from "../schema/user.schema";
+import { UserController } from "../controllers/user.controller";
+import { protectRoute } from "../middleware/auth";
 
-const userRouter = async(fastify: FastifyInstance) => {
+const userController = new UserController();
 
-  fastify.get('/users', getAllUsersSchema);
+const userRouter: FastifyPluginCallback = (fastify, options, done) => {
 
-  fastify.get('/user/:id', getUserById);
+  fastify.get('/users', { schema: getAllUsersSchema, preHandler: protectRoute }, userController.getAllUsers);
 
+  fastify.get('/user/:id', { schema: getUserByIdSchema }, userController.getUserById);
+
+  fastify.post('/auth/code', { schema: getVerificationCodeSchema }, userController.getVerificationCode);
+
+  fastify.post('/token', { schema: getTokenSchema }, userController.getToken);
+
+  done();
 }
 
 export default userRouter;

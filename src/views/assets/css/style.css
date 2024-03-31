@@ -1,0 +1,50 @@
+body {
+    background-color: #fff;
+    color: #212121;
+}
+
+p {
+    font-size: 14px;
+    line-height: 24px;
+    margin: 0;
+    color:#333;
+    font-family: -apple-system, BlinkMacSystemFont;
+    font-weight: bold;
+    text-align: center;
+}
+
+h1 {
+    color:#333;
+    font-family:-apple-system, BlinkMacSystemFont;
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.subject {
+    display: none;
+    overflow: hidden;
+    line-height: 1px;
+    opacity: 0;
+    max-height: 0;
+    max-width: 0;
+}
+
+.parent-table {
+    max-width: 37.5em;
+    padding: 20px;
+    margin: 0 auto;
+    background-color: #eee;
+}
+
+.table-first-child {
+    background-color:#fff;
+}
+
+.table-second-child {
+    background-color:#252f3d;
+    display: flex;
+    padding: 20px 0;
+    align-items: center;
+    justify-content: center;
+}

@@ -1,8 +1,9 @@
-import { FastifyReply, FastifyRequest } from "fastify";
-import { UserController } from "../controllers/user.controller";
 import { Type } from '@sinclair/typebox'
 
-const controller = new UserController();
+enum ResponseType {
+  Object,
+  Array
+}
 
 const UserSchema = Type.Object({
   id: Type.String(),
@@ -23,27 +24,43 @@ export const ParamsSchema = Type.Object({
   id: Type.String(),
 });
 
-export const getAllUsersSchema = {
-  schema: {
-    queryString: QuerySchema,
+export const getSchema = (schema?: any, body?: any, type?: ResponseType) => {
+  const res = {
+    body: body,
     response: {
-      200: Type.Array(UserSchema)
-    } 
-  },
-  handler: (req: FastifyRequest, reply: FastifyReply) => {
-    return controller.getAllUsers(req, reply);
-  }
-}
+      200: Type.Object({
+        message: Type.String(),
+        data: type != null ? type == ResponseType.Array ? Type.Array(schema) :
+          schema : Type.Array(schema),
+      }),
+      400: Type.Object({ message: Type.String() }),
+      401: Type.Object({ message: Type.String() }),
+      405: Type.Object({ message: Type.String() }),
+      409: Type.Object({ message: Type.String() }),
+      500: Type.Object({ message: Type.String(), error: Type.Any() }),
+    },
+  };
 
-export const getUserById = {
-  schema: {
-    params: ParamsSchema,
-    response: {
-      200: UserSchema
-    }
-  },
-  handler: (req: FastifyRequest, reply: FastifyReply) => {
-    return controller.getUserById(req, reply);
-  }
-}
+  return res;
+};
 
+export const VerificationRequestBodySchema = Type.Object({
+  email: Type.String(),
+  type: Type.String()
+});
+
+export const GetTokenRequestBodySchema = Type.Object({
+  email: Type.String()
+});
+
+export const GetTokenResponseSchema = Type.Object({
+  token: Type.String()
+});
+
+export const getAllUsersSchema = getSchema(UserSchema);
+
+export const getUserByIdSchema = getSchema(UserSchema);
+
+export const getVerificationCodeSchema = getSchema(null, VerificationRequestBodySchema);
+
+export const getTokenSchema = getSchema(GetTokenResponseSchema, GetTokenRequestBodySchema, ResponseType.Object);

@@ -3,8 +3,11 @@ import userRouter from './routes/user.routes';
 import { TypeBoxTypeProvider } from '@fastify/type-provider-typebox';
 import fastifySwagger from '@fastify/swagger';
 import fastifySwaggerUI from '@fastify/swagger-ui';
+import dotenv from 'dotenv';
 
-const PORT = 3000;
+dotenv.config();
+
+const PORT = 8000;
 const swaggerOptions = {
   swagger: {
     info: {
